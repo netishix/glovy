@@ -1,3 +1,5 @@
+const a = $('div');
+console.log(a);
 const div = document.createElement('div');
 div.id = 'interceptor-iframe-wrapper';
 div.style.position = 'fixed';
@@ -9,7 +11,7 @@ div.style.zIndex = '1001';
 const iframe = document.createElement('iframe');
 iframe.width = '100%';
 iframe.height = '100%';
-iframe.src = chrome.extension.getURL('dist/index.html');
+iframe.src = chrome.extension.getURL('interceptor/index.html');
 div.appendChild(iframe);
 document.body.appendChild(div);
 

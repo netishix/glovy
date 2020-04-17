@@ -7,6 +7,8 @@
     "lib": "lib"
   },
   "scripts": {
+    "build": "npm run build:ng-glovy && webpack",
+    "build:ng-glovy": "cd src/ng-glovy && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,7 +29,11 @@
     "url": "https://github.com/netishix/glovy/issues"
   },
   "homepage": "https://github.com/netishix/glovy#readme",
-  "dependencies": {
-    "jquery": "^3.5.0"
+  "dependencies": {},
+  "devDependencies": {
+    "copy-webpack-plugin": "^5.1.1",
+    "jquery": "^3.5.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
   }
 }

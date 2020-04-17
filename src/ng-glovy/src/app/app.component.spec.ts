@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'angular-chrome-extension'`, () => {
+  it(`should have as title 'ng-glovy'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('angular-chrome-extension');
+    expect(app.title).toEqual('ng-glovy');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to angular-chrome-extension!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to ng-glovy!');
   });
 });

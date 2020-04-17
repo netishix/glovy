@@ -1,7 +1,7 @@
 {
   "name": "Glovy",
   "version": "1.0",
-  "description": "A simple extension for chrome to intercept http requests",
+  "description": "A simple extension for chrome to intercept http requests on the fly",
   "author": "netishix <netishix@gmail.com>",
   "manifest_version": 2,
   "permissions": [
@@ -16,7 +16,7 @@
     ]
   },
   "web_accessible_resources": [
-    "interceptor/index.html"
+    "web-accessible-resources/interceptor/index.html"
   ],
   "browser_action": {}
 }

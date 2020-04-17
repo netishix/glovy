@@ -1,10 +1,10 @@
 {
-  "name": "angular-chrome-extension",
+  "name": "ng-glovy",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng build --watch",
-    "build": "ng build --watch",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -50,7 +50,9 @@
     "typescript": "~3.4.3"
   },
   "nodemonConfig": {
-    "ignore": ["dist/*"],
+    "ignore": [
+      "dist/*"
+    ],
     "ext": "*"
   }
 }
