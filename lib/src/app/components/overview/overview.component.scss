@@ -1,0 +1,9 @@
+#outgoing-requests-table-wrapper {
+  height: 500px;
+  overflow-y: scroll;
+}
+
+table {
+  table-layout: fixed;
+  word-wrap: break-word;
+}
