@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 const a = $('div');
 console.log(a);
 const div = document.createElement('div');
@@ -11,7 +13,7 @@ div.style.zIndex = '1001';
 const iframe = document.createElement('iframe');
 iframe.width = '100%';
 iframe.height = '100%';
-iframe.src = chrome.extension.getURL('interceptor/index.html');
+iframe.src = chrome.extension.getURL('web-accessible-resources/ng-glovy/index.html');
 div.appendChild(iframe);
 document.body.appendChild(div);
 

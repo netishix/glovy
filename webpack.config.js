@@ -2,9 +2,10 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+    devtool: "source-map",
     mode: 'development',
     entry: {
-        ['background']: path.join(__dirname, './src/extension/background/index.js'),
+        background: path.join(__dirname, './src/extension/background/index.js'),
         ['content-script']: path.join(__dirname, './src/extension/content-script/index.js'),
     },
     output: {
@@ -14,7 +15,7 @@ module.exports = {
     plugins: [
         new CopyPlugin([
             { from: 'src/extension/manifest.json', to: 'manifest.json' },
-            { from: 'src/extension/web-accessible-resources', to: 'web-accessible-resources' },
+            { from: 'src/ng-glovy/dist', to: 'web-accessible-resources/ng-glovy' },
         ]),
     ],
 };

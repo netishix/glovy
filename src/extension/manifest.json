@@ -12,11 +12,11 @@
   ],
   "background": {
     "scripts": [
-      "background.js"
+      "background/index.js"
     ]
   },
   "web_accessible_resources": [
-    "web-accessible-resources/interceptor/index.html"
+    "web-accessible-resources/ng-glovy/index.html"
   ],
   "browser_action": {}
 }
