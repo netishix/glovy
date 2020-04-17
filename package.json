@@ -1,0 +1,33 @@
+{
+  "name": "glovy",
+  "version": "1.0.0",
+  "description": "A simple Chrome extension to intercept and modify http requests on the fly",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netishix/glovy.git"
+  },
+  "keywords": [
+    "glovy",
+    "chrome",
+    "extension",
+    "http",
+    "intercept",
+    "modify"
+  ],
+  "author": "netishix",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/netishix/glovy/issues"
+  },
+  "homepage": "https://github.com/netishix/glovy#readme",
+  "dependencies": {
+    "jquery": "^3.5.0"
+  }
+}
