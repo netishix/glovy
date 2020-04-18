@@ -17,9 +17,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref" : "/web-accessible-resources/ng-globy/",
+            "baseHref" : "/web-accessible-resources/ng-glovy/",
             "deployUrl": "/web-accessible-resources/ng-glovy/",
-            "outputPath": "dist",
+            "outputPath": "../../dist//web-accessible-resources/ng-glovy",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",

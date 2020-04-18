@@ -5,9 +5,12 @@ A simple and minimalist chrome extension to intercept and modify http requests o
 Intercept, pause, modify and resume http requests. Have fun finding vulnerabilities.
 
 ## Installation
-1. Install dependencies by running ```npm install```
+1. Install dependencies and build:
 
-2. Navigate to ```chrome://extensions```, make sure that "Developer mode" is enabled, click "Load unpacked extension..." and select the extension folder.
+       npm install
+       npm run build
+
+2. Navigate to ```chrome://extensions```, make sure that ```Developer mode``` is enabled, click ```Load unpacked extension...``` and select the ```/dist``` folder.
 
 ## Usage
 

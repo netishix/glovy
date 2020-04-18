@@ -14,8 +14,7 @@ module.exports = {
     },
     plugins: [
         new CopyPlugin([
-            { from: 'src/extension/manifest.json', to: 'manifest.json' },
-            { from: 'src/ng-glovy/dist', to: 'web-accessible-resources/ng-glovy' },
-        ]),
+            { from: 'src/extension/manifest.json', to: 'manifest.json'},
+        ])
     ],
 };

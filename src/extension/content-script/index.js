@@ -1,19 +1,22 @@
 import $ from "jquery";
 
-const a = $('div');
-console.log(a);
-const div = document.createElement('div');
-div.id = 'interceptor-iframe-wrapper';
-div.style.position = 'fixed';
-div.style.bottom = '0';
-div.style.right = '0';
-div.style.left = '0';
-div.style.height = '50vh';
-div.style.zIndex = '1001';
-const iframe = document.createElement('iframe');
-iframe.width = '100%';
-iframe.height = '100%';
-iframe.src = chrome.extension.getURL('web-accessible-resources/ng-glovy/index.html');
-div.appendChild(iframe);
-document.body.appendChild(div);
+function injectGlovy() {
+    const wrapper = $('<div/>', {id: 'glovy-iframe-wrapper'});
+    wrapper.css({
+        position : 'fixed',
+        bottom: 0,
+        right: 0,
+        left: 0,
+        height: '50vh',
+        zIndex: 1001,
+    });
+    const iframeSrc = chrome.extension.getURL('web-accessible-resources/ng-glovy/index.html');
+    const iframe = $('<iframe/>', {src: iframeSrc, width: '100%', height: '100%'});
+    wrapper.append(iframe);
+    $('body').append(wrapper);
+}
+
+injectGlovy();
+
+
 
