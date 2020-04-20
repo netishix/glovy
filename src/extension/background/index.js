@@ -1,12 +1,6 @@
-// chrome.browserAction.onClicked.addListener(function() {
-//     console.log('clicked!');
-//     chrome.windows.create({'url': 'index.html', 'type': 'popup'}, function(window) {
-//     });
-// });
-
 chrome.browserAction.onClicked.addListener(function(tab) {
     chrome.tabs.executeScript({
         file: "content-script/index.js"
     });
-    console.log('injected!!');
+    // chrome.browserAction.setBadgeBackgroundColor({color: '#FF0000' });
 });

@@ -16,7 +16,9 @@
     ]
   },
   "web_accessible_resources": [
-    "web-accessible-resources/ng-glovy/index.html"
+    "web-accessible-resources/ng-glovy/index.html",
+    "web-accessible-resources/glovy-ui.html",
+    "web-accessible-resources/glovy-ui.css"
   ],
   "browser_action": {}
 }

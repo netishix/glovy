@@ -1,22 +1,11 @@
-import $ from "jquery";
+import { GlovyUI } from "./GlovyUI";
 
-function injectGlovy() {
-    const wrapper = $('<div/>', {id: 'glovy-iframe-wrapper'});
-    wrapper.css({
-        position : 'fixed',
-        bottom: 0,
-        right: 0,
-        left: 0,
-        height: '50vh',
-        zIndex: 1001,
+const glovyUI = new GlovyUI();
+glovyUI.init()
+    .catch((e) => {
+        console.log('An error occurred while initializing Glovy. See below:');
+        console.error(e);
     });
-    const iframeSrc = chrome.extension.getURL('web-accessible-resources/ng-glovy/index.html');
-    const iframe = $('<iframe/>', {src: iframeSrc, width: '100%', height: '100%'});
-    wrapper.append(iframe);
-    $('body').append(wrapper);
-}
-
-injectGlovy();
 
 
 

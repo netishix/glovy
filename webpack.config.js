@@ -15,6 +15,8 @@ module.exports = {
     plugins: [
         new CopyPlugin([
             { from: 'src/extension/manifest.json', to: 'manifest.json'},
+            { from: 'src/extension/web-accessible-resources/glovy-ui.html', to: 'web-accessible-resources/glovy-ui.html'},
+            { from: 'src/extension/web-accessible-resources/glovy-ui.css', to: 'web-accessible-resources/glovy-ui.css'},
         ])
     ],
 };
