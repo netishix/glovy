@@ -5,6 +5,7 @@
   "author": "netishix <netishix@gmail.com>",
   "manifest_version": 2,
   "permissions": [
+    "storage",
     "webRequest",
     "http://*/",
     "https://*/",

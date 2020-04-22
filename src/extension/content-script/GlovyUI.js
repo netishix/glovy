@@ -1,7 +1,9 @@
 import $ from "jquery";
 
+const STYLES_ID = '#glovy-styles';
 const UI_ID = '#glovy-ui';
 const IFRAME_ID = '#ng-glovy-iframe';
+const STORAGE_KEY_IFRAME_HEIGHT = 'iframe-height';
 
 class GlovyUI {
 
@@ -10,8 +12,11 @@ class GlovyUI {
         if(!hasGlovyBeenInjected) {
             await this.inject();
             this.handleEvents();
-            this.UI_SELECTOR = $(UI_ID);
-            this.IFRAME_SELECTOR = $(IFRAME_ID);
+            this.selectors = {
+                STYLES: $(STYLES_ID),
+                UI: $(UI_ID),
+                IFRAME: $(IFRAME_ID),
+            };
         }
     }
 
@@ -19,34 +24,56 @@ class GlovyUI {
         const UI_TEMPLATE = await $.get(chrome.extension.getURL('web-accessible-resources/glovy-ui.html')).then();
         $('body').append(UI_TEMPLATE);
         const UI_CSS = await $.get(chrome.extension.getURL('web-accessible-resources/glovy-ui.css')).then();
-        $('head').append(`<style> ${UI_CSS} </style>`);
+        $('head').append(`<style id="${STYLES_ID}"> ${UI_CSS} </style>`);
         const iframeSrc = chrome.extension.getURL('web-accessible-resources/ng-glovy/index.html');
         $(IFRAME_ID).attr('src', iframeSrc);
+    }
+
+    close() {
+        this.selectors.STYLES.remove();
+        this.selectors.UI.remove();
     }
 
     handleEvents() {
         window.onmessage = (e) => {
             if (typeof e.data === 'object' && typeof e.data.action === 'string') {
                 switch (e.data.action) {
+                    case 'VERTICAL_RESIZE':
+                        const {movementY} = e.data;
+                        this.verticalResize(movementY);
+                        break;
+                    case 'MINIMIZE':
+                        const {height} = e.data;
+                        this.minimize(height);
+                        break;
+                    case 'MAXIMIZE':
+                        this.maximize();
+                        break;
                     case 'CLOSE':
                         this.close();
-                        break;
-                    case 'RESIZE':
-                        const height = e.data.height;
-                        this.setIframeHeight(height);
                         break;
                 }
             }
         };
     }
 
-    setIframeHeight(newHeight) {
-        this.IFRAME_SELECTOR.attr({height: newHeight});
+    verticalResize(movementY) {
+        const oldHeight = this.selectors.IFRAME.height();
+        const newHeight = oldHeight + movementY;
+        this.selectors.IFRAME.attr({height: newHeight});
+        chrome.storage.local.set({[STORAGE_KEY_IFRAME_HEIGHT]: newHeight});
     }
 
-    close() {
-        this.UI_SELECTOR.remove();
+    minimize(height) {
+        this.selectors.IFRAME.attr({height});
     }
+
+    maximize() {
+        chrome.storage.local.get([STORAGE_KEY_IFRAME_HEIGHT], (result) => {
+            this.selectors.IFRAME.attr({height: result[STORAGE_KEY_IFRAME_HEIGHT]});
+        });
+    }
+
 }
 
 export { GlovyUI };

@@ -10,15 +10,14 @@ declare let chrome;
 })
 export class OverviewComponent implements OnInit {
 
-  public maximized: boolean;
+  public showGlovyContent: boolean;
   public requests: HttpRequest[];
-
   constructor(
     public _ChangeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
-    this.maximized = true;
+    this.showGlovyContent = true;
     this.requests = [];
     this.registerEvents();
   }
@@ -34,32 +33,16 @@ export class OverviewComponent implements OnInit {
         };
         if (this.requests.length < 100) {
           this.requests.push(outgoingHttpRequest);
-          this.detectChanges();
+          this._ChangeDetectorRef.detectChanges();
         }
     },
       {urls: ['<all_urls>']},
     );
   }
 
-  public detectChanges() {
+  public onToolbarResize(event) {
+    this.showGlovyContent = event.isMaximized;
     this._ChangeDetectorRef.detectChanges();
   }
-
-  public getDocumentHeight() {
-    return document.body.clientHeight;
-  }
-
-  public resize(maximize: boolean): void {
-    this.maximized = maximize;
-    this.detectChanges();
-    const newHeight = this.getDocumentHeight();
-    window.top.postMessage({action: 'RESIZE', height: newHeight}, '*');
-  }
-
-  public close(): void {
-    window.top.postMessage({action: 'CLOSE'}, '*');
-  }
-
-
 
 }
