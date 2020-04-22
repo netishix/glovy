@@ -1,17 +1,18 @@
 import $ from "jquery";
 
 const UI_ID = '#glovy-ui';
-const UI_MINIMIZE_BTN_ID = '#glovy-minimize-btn';
-const UI_MAXIMIZE_BTN_ID = '#glovy-maximize-btn';
-const UI_CLOSE_BTN_ID = '#glovy-close-btn';
 const IFRAME_ID = '#ng-glovy-iframe';
 
 class GlovyUI {
 
     async init () {
-        await this.inject();
-        this.handleEvents();
-        this.UI_ELEMENT = $(UI_ID);
+        const hasGlovyBeenInjected = $(UI_ID).length;
+        if(!hasGlovyBeenInjected) {
+            await this.inject();
+            this.handleEvents();
+            this.UI_SELECTOR = $(UI_ID);
+            this.IFRAME_SELECTOR = $(IFRAME_ID);
+        }
     }
 
     async inject() {
@@ -24,35 +25,28 @@ class GlovyUI {
     }
 
     handleEvents() {
-        $(UI_MINIMIZE_BTN_ID).on( 'click', () => {
-            this.minimize();
-        });
-        $(UI_MAXIMIZE_BTN_ID).on( 'click', () => {
-            this.maximize();
-        });
-        $(UI_CLOSE_BTN_ID).on( 'click', () => {
-            this.close();
-        });
-
+        window.onmessage = (e) => {
+            if (typeof e.data === 'object' && typeof e.data.action === 'string') {
+                switch (e.data.action) {
+                    case 'CLOSE':
+                        this.close();
+                        break;
+                    case 'RESIZE':
+                        const height = e.data.height;
+                        this.setIframeHeight(height);
+                        break;
+                }
+            }
+        };
     }
 
-    minimize() {
-        this.UI_ELEMENT
-            .removeClass('glovy-ui-maximized')
-            .addClass('glovy-ui-minimized');
-    }
-
-    maximize() {
-        this.UI_ELEMENT
-            .removeClass('glovy-ui-minimized')
-            .addClass('glovy-ui-maximized');
+    setIframeHeight(newHeight) {
+        this.IFRAME_SELECTOR.attr({height: newHeight});
     }
 
     close() {
-        this.UI_ELEMENT.remove();
+        this.UI_SELECTOR.remove();
     }
-
-
 }
 
 export { GlovyUI };

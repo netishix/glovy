@@ -2,5 +2,13 @@ chrome.browserAction.onClicked.addListener(function(tab) {
     chrome.tabs.executeScript({
         file: "content-script/index.js"
     });
-    // chrome.browserAction.setBadgeBackgroundColor({color: '#FF0000' });
 });
+
+// chrome.runtime.onMessage.addListener((request, sender) => {
+//     alert('received');
+//     switch(request.action) {
+//         case 'changeIcon':
+//             chrome.browserAction.setIcon({path: request.newIconPath});
+//             break;
+//     }
+// });

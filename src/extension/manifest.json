@@ -20,5 +20,7 @@
     "web-accessible-resources/glovy-ui.html",
     "web-accessible-resources/glovy-ui.css"
   ],
-  "browser_action": {}
+  "browser_action": {
+    "default_icon": "icons/default-icon.png"
+  }
 }

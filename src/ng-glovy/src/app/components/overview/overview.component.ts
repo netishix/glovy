@@ -10,6 +10,7 @@ declare let chrome;
 })
 export class OverviewComponent implements OnInit {
 
+  public maximized: boolean;
   public requests: HttpRequest[];
 
   constructor(
@@ -17,6 +18,7 @@ export class OverviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.maximized = true;
     this.requests = [];
     this.registerEvents();
   }
@@ -30,7 +32,7 @@ export class OverviewComponent implements OnInit {
           method: details.method,
           body: details.body,
         };
-        if(this.requests.length < 100){
+        if (this.requests.length < 100) {
           this.requests.push(outgoingHttpRequest);
           this.detectChanges();
         }
@@ -40,7 +42,22 @@ export class OverviewComponent implements OnInit {
   }
 
   public detectChanges() {
-    this._ChangeDetectorRef.detectChanges()
+    this._ChangeDetectorRef.detectChanges();
+  }
+
+  public getDocumentHeight() {
+    return document.body.clientHeight;
+  }
+
+  public resize(maximize: boolean): void {
+    this.maximized = maximize;
+    this.detectChanges();
+    const newHeight = this.getDocumentHeight();
+    window.top.postMessage({action: 'RESIZE', height: newHeight}, '*');
+  }
+
+  public close(): void {
+    window.top.postMessage({action: 'CLOSE'}, '*');
   }
 
 
