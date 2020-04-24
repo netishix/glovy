@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ng-glovy';
+
+  public showGlovyContent: boolean;
+  constructor(
+    public _ChangeDetectorRef: ChangeDetectorRef
+  ) {
+    this.showGlovyContent = true;
+  }
+
+  public onToolbarResize(event) {
+    this.showGlovyContent = event.isMaximized;
+    this._ChangeDetectorRef.detectChanges();
+  }
 }

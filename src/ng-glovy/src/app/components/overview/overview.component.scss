@@ -1,10 +1,17 @@
-
-#outgoing-requests-table-wrapper {
-  height: 500px;
+#overview {
+  display: block;
   overflow-y: scroll;
+  height: 80vh;
 }
 
 table {
-  table-layout: fixed;
   word-wrap: break-word;
+  table-layout: fixed;
+}
+
+th {
+  position: sticky;
+  top: -1px;
+  background: white;
+  z-index: 2;
 }

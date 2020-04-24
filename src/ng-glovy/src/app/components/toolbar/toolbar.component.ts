@@ -1,5 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
+const DEFAULT_DRAG_IMAGE = new Image();
+DEFAULT_DRAG_IMAGE.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -35,9 +38,7 @@ export class ToolbarComponent implements OnInit {
 
   public onDragStart(e) {
     this.lastYDragged = e.screenY;
-    const img = document.createElement('img')
-    img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-    e.dataTransfer.setDragImage(img, 0, 0);
+    e.dataTransfer.setDragImage(DEFAULT_DRAG_IMAGE, 0, 0);
   }
 
   public onDrag(e) {

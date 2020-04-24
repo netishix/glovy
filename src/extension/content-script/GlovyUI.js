@@ -4,6 +4,7 @@ const STYLES_ID = '#glovy-styles';
 const UI_ID = '#glovy-ui';
 const IFRAME_ID = '#ng-glovy-iframe';
 const STORAGE_KEY_IFRAME_HEIGHT = 'iframe-height';
+const INITIAL_IFRAME_HEIGHT = 500;
 
 class GlovyUI {
 
@@ -17,6 +18,7 @@ class GlovyUI {
                 UI: $(UI_ID),
                 IFRAME: $(IFRAME_ID),
             };
+            this.maximize(INITIAL_IFRAME_HEIGHT);
         }
     }
 
@@ -68,10 +70,15 @@ class GlovyUI {
         this.selectors.IFRAME.attr({height});
     }
 
-    maximize() {
-        chrome.storage.local.get([STORAGE_KEY_IFRAME_HEIGHT], (result) => {
-            this.selectors.IFRAME.attr({height: result[STORAGE_KEY_IFRAME_HEIGHT]});
-        });
+    maximize(height = null) {
+        if (height) {
+            this.selectors.IFRAME.attr({height});
+        } else {
+            chrome.storage.local.get([STORAGE_KEY_IFRAME_HEIGHT], (result) => {
+                this.selectors.IFRAME.attr({height: result[STORAGE_KEY_IFRAME_HEIGHT]});
+            });
+        }
+
     }
 
 }

@@ -10,16 +10,25 @@ declare let chrome;
 })
 export class OverviewComponent implements OnInit {
 
-  public showGlovyContent: boolean;
+  public isIntercepting: boolean;
   public requests: HttpRequest[];
+
   constructor(
     public _ChangeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
-    this.showGlovyContent = true;
     this.requests = [];
     this.registerEvents();
+    this.intercept();
+  }
+
+  public intercept(): void {
+    this.isIntercepting = true;
+  }
+
+  public pause(): void {
+    this.isIntercepting = false;
   }
 
   public registerEvents(): void {
@@ -39,10 +48,4 @@ export class OverviewComponent implements OnInit {
       {urls: ['<all_urls>']},
     );
   }
-
-  public onToolbarResize(event) {
-    this.showGlovyContent = event.isMaximized;
-    this._ChangeDetectorRef.detectChanges();
-  }
-
 }
